@@ -10,13 +10,14 @@ client.connect(('127.0.0.1', 55555))
 
 def receive():
     while True:
-        try:
-            # Receive Message From Server
-            # If 'NICK' Send Nickname
+        try:     
             message = client.recv(1024).decode('ascii')
-            if message == 'NICK':
+            if message == '1234':
                 client.send(nickname.encode('ascii'))
             else:
+                
+                if message.split(":")[0] == nickname:
+                    message = 'Me:' + message.split(":")[1]
                 print(message)
         except:
             # Close Connection When Error
